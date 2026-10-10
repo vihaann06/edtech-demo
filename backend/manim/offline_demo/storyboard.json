@@ -1,0 +1,75 @@
+{
+  "topic": "The Pythagorean theorem",
+  "title": "The Pythagorean Theorem",
+  "target_duration": 30.0,
+  "learning_objective": "In a right triangle, the square built on the hypotenuse has exactly the same area as the squares on the two legs combined.",
+  "running_example": "The 3-4-5 right triangle: legs a = 3 and b = 4, hypotenuse c = 5, whose squares hold 9, 16 and 25 unit cells.",
+  "scenes": [
+    {
+      "index": 0,
+      "concept": "A right triangle",
+      "start_time": 0.0,
+      "duration": 7.0,
+      "caption": "A right triangle has two legs, a = 3 and b = 4, and a longest side, the hypotenuse c = 5.",
+      "visual_description": "A 3-4-5 right triangle on the left with its legs colored blue (a) and purple (b), the hypotenuse cyan (c), and a small right-angle mark. On the right, three chips list a = 3, b = 4 and c = 5 with the words leg, leg and hypotenuse.",
+      "animation_instructions": [
+        "Draw the three sides of the triangle one after another (1.5 s).",
+        "Fade in the faint fill and the right-angle mark (0.8 s).",
+        "Write the side labels a = 3, b = 4, c = 5 next to their sides (1.2 s).",
+        "Bring in the three chips on the right, then pulse the hypotenuse and hold (2.5 s)."
+      ],
+      "math_expressions": [],
+      "visual_objects": ["3-4-5 right triangle", "right-angle mark", "side labels", "side chips"],
+      "transition": "The triangle and the chips stay; the side labels make way for squares on each side."
+    },
+    {
+      "index": 1,
+      "concept": "A square on every side",
+      "start_time": 7.0,
+      "duration": 8.0,
+      "caption": "Build a square on each side. Counting unit cells gives areas 3² = 9, 4² = 16 and 5² = 25.",
+      "visual_description": "A square grows outward from each side, divided into unit cells: 3 by 3 blue cells on a, 4 by 4 purple cells on b, and a tilted 5 by 5 cyan grid on c, with 9, 16 and 25 written in their centers. The chips update to a² = 9, b² = 16 and c² = 25.",
+      "animation_instructions": [
+        "Fade out the side labels and draw the three square outlines (1 s).",
+        "Fill the a-square cell by cell, then the b-square, then the c-square (4.2 s).",
+        "Write 9, 16 and 25 inside the squares and update the chips to the areas, then hold (2.6 s)."
+      ],
+      "math_expressions": [],
+      "visual_objects": ["triangle", "three gridded squares", "area numbers", "area chips"],
+      "transition": "Everything stays; the big square's own cells empty out so the small cells can move in."
+    },
+    {
+      "index": 2,
+      "concept": "Small squares fill the big one",
+      "start_time": 15.0,
+      "duration": 8.0,
+      "caption": "Move the 9 blue and 16 purple cells into the big square: they fill it exactly, so 9 + 16 = 25.",
+      "visual_description": "The cyan cells of the hypotenuse square turn into empty outlines. Copies of the 3 by 3 blue block slide and rotate into one corner of it, and the 16 purple cells fly into the L-shaped region that remains, filling every cell. On the right, 9 + 16 = 25 appears in matching colors.",
+      "animation_instructions": [
+        "Empty the cyan cells of the big square, leaving outlines (0.7 s).",
+        "Slide a copy of the blue 3 by 3 block into the corner of the big square (1.6 s).",
+        "Fly the 16 purple cells into the remaining L-shaped cells one after another (2.4 s).",
+        "Write 9 + 16 = 25 on the right, pulse the filled square and hold (3 s)."
+      ],
+      "math_expressions": ["9 + 16 = 25"],
+      "visual_objects": ["triangle", "three squares", "moving cells", "sum equation"],
+      "transition": "The figure stays; the chips and the sum give way to the general formula."
+    },
+    {
+      "index": 3,
+      "concept": "a² + b² = c²",
+      "start_time": 23.0,
+      "duration": 7.0,
+      "caption": "This works for every right triangle: the two leg squares together equal the hypotenuse square.",
+      "visual_description": "The filled figure stays on the left. On the right the formula a² + b² = c² appears large, colored blue, purple and cyan, with 3² + 4² = 5² beneath it and a note that it holds for every right triangle.",
+      "animation_instructions": [
+        "Clear the chips and the sum from the right side (0.6 s).",
+        "Write a² + b² = c² in matching colors, then 3² + 4² = 5² beneath it (2.4 s).",
+        "Trace a highlight around the formula, add the note, and hold the final frame (3.5 s)."
+      ],
+      "math_expressions": ["a^2 + b^2 = c^2", "3^2 + 4^2 = 5^2"],
+      "visual_objects": ["filled figure", "general formula", "numeric check", "note"],
+      "transition": "The video ends holding the figure and the formula."
+    }
+  ]
+}

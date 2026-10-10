@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+/*
+ * Lumen design tokens. Dark-only: the UI is built to sit next to the generated
+ * videos (near-black navy canvas, 3Blue1Brown-style blue / purple / teal / yellow).
+ */
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --color-ink-950: #05070e;
+  --color-ink-900: #080b16;
+  --color-ink-850: #0c1020;
+  --color-ink-800: #11172b;
+  --color-ink-700: #1a2240;
+
+  --color-fg: #eef1f8;
+  --color-fg-muted: #a6aec4;
+  --color-fg-subtle: #7d87a3;
+  --color-fg-faint: #6b7591;
+
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.14);
+
+  --color-blue: #58c4dd;
+  --color-cyan: #7fe3f0;
+  --color-indigo: #8a93f7;
+  --color-violet: #b394f6;
+  --color-purple: #9a72ac;
+  --color-teal: #5cd0b3;
+  --color-yellow: #f4d345;
+  --color-amber: #f6c26b;
+  --color-rose: #f58a8a;
+
+  --animate-shimmer: shimmer 2.2s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-spin-slow: spin 2.4s linear infinite;
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+:root {
+  color-scheme: dark;
+  --bg: var(--color-ink-900);
+}
+
+html {
+  background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgb(88 196 221 / 0.35);
+  color: #fff;
+}
+
+/* Gradient text used for the hero accent line. */
+.text-gradient {
+  background-image: linear-gradient(100deg, #7fe3f0 0%, #58c4dd 25%, #8a93f7 62%, #b394f6 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Faint coordinate plane behind the page — a nod to Manim's NumberPlane. */
+.bg-plane {
+  background-image:
+    linear-gradient(to right, rgb(88 196 221 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(88 196 221 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center top;
+}
+
+/* ---- Canvas loader (SVG) animations ---- */
+.draw-loop {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-loop 5.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes draw-loop {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  85% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+.edge-pulse {
+  stroke-dasharray: 0.12 0.88;
+  animation: edge-pulse 2.6s linear infinite;
+}
+
+@keyframes edge-pulse {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.node-breathe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes node-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+.tile-in {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tile-in 4.8s cubic-bezier(0.22, 1, 0.36, 1) infinite both;
+}
+
+@keyframes tile-in {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  14%,
+  80% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px) scale(1);
+  }
+}
+
+.scan-sweep {
+  animation: scan-sweep 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes scan-sweep {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1400px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .draw-loop,
+  .tile-in,
+  .edge-pulse,
+  .scan-sweep {
+    animation: none !important;
+  }
+  .draw-loop {
+    stroke-dashoffset: 0;
+  }
+  .scan-sweep {
+    opacity: 0;
+  }
+}

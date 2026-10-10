@@ -1,0 +1,36 @@
+# Sandbox image for rendering LLM-generated Manim scenes.
+#
+#   docker build -f docker/Dockerfile.renderer -t explainer-manim-renderer:0.19.2 docker/
+#
+# The build context is only the docker/ directory (nothing else is copied in).
+# The design system (backend/manim/visual_helpers.py) is NOT baked in: the
+# renderer bind-mounts backend/manim read-only at /opt/explainer at run time,
+# so editing the helpers never requires a rebuild.
+FROM manimcommunity/manim:v0.19.2
+
+USER root
+
+# Inter: a clean, modern sans for every Text/MarkupText in the videos.
+# ffmpeg/ffprobe already ship in the base image; we re-check below so a base
+# image change fails the build instead of the first render.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends fonts-inter \
+ && rm -rf /var/lib/apt/lists/* \
+ && fc-cache -f \
+ && fc-list : family | grep -qx "Inter" \
+ && command -v ffmpeg >/dev/null \
+ && command -v ffprobe >/dev/null \
+ && command -v latex >/dev/null \
+ && command -v dvisvgm >/dev/null
+
+# Run as the unprivileged user that ships with the base image (uid 1000).
+# The renderer additionally runs containers with --read-only, --cap-drop ALL,
+# --network none, no-new-privileges, and HOME=/tmp (a tmpfs).
+USER manimuser
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    NO_COLOR=1 \
+    TERM=dumb \
+    COLUMNS=200
+WORKDIR /work
+CMD ["manim", "--version"]
